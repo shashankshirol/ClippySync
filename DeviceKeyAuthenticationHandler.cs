@@ -10,9 +10,8 @@ public class DeviceKeyAuthenticationHandler: AuthenticationHandler<Authenticatio
     public DeviceKeyAuthenticationHandler(
         IOptionsMonitor<AuthenticationSchemeOptions> options,
         ILoggerFactory logger,
-        UrlEncoder encoder,
-        ISystemClock clock
-    ) : base(options, logger, encoder, clock){}
+        UrlEncoder encoder
+    ) : base(options, logger, encoder){}
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
         if (!Request.Headers.TryGetValue("X-Device-Key", out var extractedDeviceKey))

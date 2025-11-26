@@ -46,12 +46,12 @@ app.MapGet("/clipboard", handler: async (HttpContext httpContext) =>
         {
             Name = "X-Device-Key",
             In = ParameterLocation.Header,
-            Required = false,
+            Required = true,
             Schema = new OpenApiSchema
             {
                 Type = "string",
                 Description = "Device key header for authentication"
-            }
+            },
         });
         return operation;
     }
@@ -72,7 +72,7 @@ app.MapPost(pattern: "/set-clipboard", handler: async (HttpContext httpContext) 
             {
                 Name = "X-Device-Key",
                 In = ParameterLocation.Header,
-                Required = false,
+                Required = true,
                 Schema = new OpenApiSchema
                 {
                     Type = "string",
