@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <ApplicationIcon>Resources\ClippySync.Tray.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ClippySync.Web\ClippySync.Web.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Include="Resources\ClippySync.Tray.ico"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="Resources\ClippySync.Tray.ico">
+            <Link>ClippySync.Tray.ico</Link>
+        </None>
+    </ItemGroup>
+
+</Project>

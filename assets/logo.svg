@@ -20,6 +20,7 @@
     <!-- Wordmark -->
     <text x="100" y="70" font-family="Inter, Segoe UI, sans-serif"
           font-size="36" font-weight="700" fill="#ffffff">
-        Clippy<tspan fill="#2563EB">Sync</tspan>
+        Clippy
+        <tspan fill="#2563EB">Sync</tspan>
     </text>
 </svg>
