@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.OpenApi;
 using TextCopy;
 
 namespace ClippySync.Web;
@@ -34,7 +35,7 @@ public abstract class ClippyWebApp
         // Endpoint to get device name
         app.MapGet("/get-device-name",
                 (HttpContext httpContext) => Results.Ok(new { Message = Environment.MachineName }))
-            .WithName("GetDeviceName").WithOpenApi();
+            .WithName("GetDeviceName");
 
 
         // Endpoint to get clipboard text
@@ -42,20 +43,20 @@ public abstract class ClippyWebApp
         {
             var clipboardText = await ClipboardService.GetTextAsync() ?? string.Empty;
             return Results.Ok(new { Message = clipboardText });
-        }).WithName("GetClipboardText").WithOpenApi(operation =>
+        }).WithName("GetClipboardText").AddOpenApiOperationTransformer((operation, context, ct) =>
             {
-                operation.Parameters.Add(new OpenApiParameter
+                operation.Parameters!.Add(new OpenApiParameter
                 {
                     Name = "X-Device-Key",
                     In = ParameterLocation.Header,
                     Required = true,
                     Schema = new OpenApiSchema
                     {
-                        Type = "string",
+                        Type = JsonSchemaType.String,
                         Description = "Device key header for authentication"
                     }
                 });
-                return operation;
+                return Task.CompletedTask;
             }
         ).RequireAuthorization();
 
@@ -68,35 +69,35 @@ public abstract class ClippyWebApp
                 await ClipboardService.SetTextAsync(newClipboardText);
                 return Results.Ok(new { Message = "Clipboard updated successfully." });
             }).WithName("SetClipboardText")
-            .WithOpenApi(operation =>
+            .AddOpenApiOperationTransformer((operation, context, ct) =>
                 {
-                    operation.Parameters.Add(new OpenApiParameter
+                    operation.Parameters!.Add(new OpenApiParameter
                     {
                         Name = "X-Device-Key",
                         In = ParameterLocation.Header,
                         Required = true,
                         Schema = new OpenApiSchema
                         {
-                            Type = "string",
+                            Type = JsonSchemaType.String,
                             Description = "Device key header for authentication"
                         }
                     });
                     operation.RequestBody = new OpenApiRequestBody
                     {
-                        Content =
+                        Content = new Dictionary<string, OpenApiMediaType>
                         {
                             ["text/plain"] = new OpenApiMediaType
                             {
                                 Schema = new OpenApiSchema
                                 {
-                                    Type = "string",
+                                    Type = JsonSchemaType.String,
                                     Description = "The text to set in the clipboard."
                                 }
                             }
                         },
                         Required = true
                     };
-                    return operation;
+                    return Task.CompletedTask;
                 }
             )
             .RequireAuthorization();
