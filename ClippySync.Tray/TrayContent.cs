@@ -71,18 +71,27 @@ public class TrayContent : ApplicationContext
 
     private async void OnExitClicked(object? sender, EventArgs e)
     {
-        _trayIcon.Visible = false;
-        _trayIcon.Dispose();
-
         try
         {
-            await _webapp.StopAsync();
+            _trayIcon.Visible = false;
+            _trayIcon.Dispose();
+
+            try
+            {
+                await _webapp.StopAsync();
+            }
+            finally
+            {
+                await _webapp.DisposeAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            await Console.Error.WriteLineAsync(ex.Message);
         }
         finally
         {
-            await _webapp.DisposeAsync();
+            Application.Exit();
         }
-
-        Application.Exit();
     }
 }

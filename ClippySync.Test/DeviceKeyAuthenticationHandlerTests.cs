@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
+using static NUnit.Framework.Assert;
 
 namespace ClippySync.Test;
 
@@ -22,8 +23,8 @@ public class DeviceKeyAuthenticationHandlerTests
 
         var result = await handler.AuthenticateAsync();
 
-        Assert.That(result.Succeeded, Is.True);
-        Assert.That(result.Principal?.Identity?.IsAuthenticated, Is.True);
+        That(result.Succeeded, Is.True);
+        That(result.Principal?.Identity?.IsAuthenticated, Is.True);
     }
 
     [Test]
@@ -36,9 +37,9 @@ public class DeviceKeyAuthenticationHandlerTests
 
         var result = await handler.AuthenticateAsync();
 
-        Assert.That(result.Succeeded, Is.False);
-        Assert.That(result.Failure, Is.Not.Null);
-        Assert.That(result.Failure?.Message, Is.EqualTo("DeviceKey"));
+        That(result.Succeeded, Is.False);
+        That(result.Failure, Is.Not.Null);
+        That(result.Failure?.Message, Is.EqualTo("DeviceKey"));
     }
 
     [Test]
@@ -52,9 +53,9 @@ public class DeviceKeyAuthenticationHandlerTests
 
         var result = await handler.AuthenticateAsync();
 
-        Assert.That(result.Succeeded, Is.False);
-        Assert.That(result.Failure, Is.Not.Null);
-        Assert.That(result.Failure?.Message, Does.Contain("Invalid Device Key"));
+        That(result.Succeeded, Is.False);
+        That(result.Failure, Is.Not.Null);
+        That(result.Failure?.Message, Does.Contain("Invalid Device Key"));
     }
 
     private static DeviceKeyAuthenticationHandler CreateHandler()
@@ -73,11 +74,9 @@ public class DeviceKeyAuthenticationHandlerTests
     private sealed class TestOptionsMonitor<TOptions>(TOptions currentValue) : IOptionsMonitor<TOptions>
         where TOptions : class
     {
-        private readonly TOptions _currentValue = currentValue;
+        public TOptions CurrentValue => currentValue;
 
-        public TOptions CurrentValue => _currentValue;
-
-        public TOptions Get(string? name) => _currentValue;
+        public TOptions Get(string? name) => currentValue;
 
         public IDisposable OnChange(Action<TOptions, string?> listener) => NullDisposable.Instance;
 

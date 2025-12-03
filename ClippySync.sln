@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClippySync.Web", "ClippySync.Web.csproj", "{D69E46EF-CFB9-4E1F-BC2B-EAE22BA42789}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClippySync.Web", "ClippySync.Web\ClippySync.Web.csproj", "{30ECE71A-C132-45E5-A097-A647E8EC3B8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClippySync.Tray", "ClippySync.Tray\ClippySync.Tray.csproj", "{ADCBCFD0-E128-41ED-B288-CCAE8C9CC229}"
@@ -14,10 +12,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D69E46EF-CFB9-4E1F-BC2B-EAE22BA42789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D69E46EF-CFB9-4E1F-BC2B-EAE22BA42789}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D69E46EF-CFB9-4E1F-BC2B-EAE22BA42789}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D69E46EF-CFB9-4E1F-BC2B-EAE22BA42789}.Release|Any CPU.Build.0 = Release|Any CPU
 		{30ECE71A-C132-45E5-A097-A647E8EC3B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{30ECE71A-C132-45E5-A097-A647E8EC3B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30ECE71A-C132-45E5-A097-A647E8EC3B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
