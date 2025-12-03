@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.OpenApi;
+using System.Text.Json;
 using TextCopy;
 
 namespace ClippySync.Web;
@@ -64,8 +65,8 @@ public abstract class ClippyWebApp
         // Endpoint to set clipboard text
         app.MapPost("/set-clipboard", async (HttpContext httpContext) =>
             {
-                using var reader = new StreamReader(httpContext.Request.Body);
-                var newClipboardText = await reader.ReadToEndAsync();
+                var body = await JsonSerializer.DeserializeAsync<Dictionary<string, string>>(httpContext.Request.Body);
+                var newClipboardText = body["clipboard"];
                 await ClipboardService.SetTextAsync(newClipboardText);
                 return Results.Ok(new { Message = "Clipboard updated successfully." });
             }).WithName("SetClipboardText")
@@ -86,11 +87,11 @@ public abstract class ClippyWebApp
                     {
                         Content = new Dictionary<string, OpenApiMediaType>
                         {
-                            ["text/plain"] = new OpenApiMediaType
+                            ["application/json"] = new OpenApiMediaType
                             {
                                 Schema = new OpenApiSchema
                                 {
-                                    Type = JsonSchemaType.String,
+                                    Type = JsonSchemaType.Object,
                                     Description = "The text to set in the clipboard."
                                 }
                             }

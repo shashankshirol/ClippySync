@@ -10,10 +10,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ClippySync.Web\ClippySync.Web.csproj"/>
+        <ProjectReference Include="..\ClippySync.Web\ClippySync.Web.csproj" />
     </ItemGroup>
     <ItemGroup>
-        <EmbeddedResource Include="Resources\ClippySync.Tray.ico"/>
+        <EmbeddedResource Include="Resources\ClippySync.Tray.ico" />
     </ItemGroup>
 
 	<PropertyGroup>
