@@ -23,6 +23,11 @@
         <PackageReference Include="NUnit3TestAdapter" Version="5.2.0"/>
     </ItemGroup>
 
+	<PropertyGroup>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	</PropertyGroup>
+
     <ItemGroup>
         <Using Include="NUnit.Framework"/>
     </ItemGroup>

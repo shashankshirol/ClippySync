@@ -7,25 +7,39 @@ public abstract class Util
 {
     public static string? GetLocalIPv4()
     {
-        foreach (var ni in NetworkInterface.GetAllNetworkInterfaces())
-        {
+        var networkInts = NetworkInterface.GetAllNetworkInterfaces();
+        foreach (var ni in networkInts)
+        { 
             if (ni.OperationalStatus != OperationalStatus.Up)
                 continue;
-            var skiptypes = new[]
+            var allowedTypes = new[]
             {
-                NetworkInterfaceType.Unknown,
-                NetworkInterfaceType.Loopback,
-                NetworkInterfaceType.Tunnel,
-                NetworkInterfaceType.Ppp
-            };
-            if (skiptypes.Contains(ni.NetworkInterfaceType))
+                NetworkInterfaceType.Ethernet, 
+                NetworkInterfaceType.Wireless80211,  
+            }; 
+            if (!allowedTypes.Contains(ni.NetworkInterfaceType))
                 continue;
 
-            foreach (var ip in ni.GetIPProperties().UnicastAddresses)
-                if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
-                    return ip.Address.ToString();
-        }
+            // skip virtual adapters
+            string[] virtualKeywords =
+            {
+                "virtual", "vmware", "hyper-v", "vbox", "virtualbox",
+                "wsl", "vpn", "wireguard", "wg", "nord", "tap", "tun"
+            };
 
-        return null;
+            if (virtualKeywords.Any(v =>
+                ni.Name.Contains(v, StringComparison.OrdinalIgnoreCase) ||
+                ni.Description.Contains(v, StringComparison.OrdinalIgnoreCase)))
+            {
+                continue;
+            }
+
+            var addresses = ni.GetIPProperties().UnicastAddresses;
+            foreach (var ip in addresses) 
+                if (ip.Address.AddressFamily == AddressFamily.InterNetwork) 
+                    return ip.Address.ToString(); 
+        } 
+
+        return null; 
     }
 }

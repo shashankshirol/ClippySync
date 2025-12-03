@@ -12,6 +12,11 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
         <PackageReference Include="TextCopy" Version="6.2.1" />
     </ItemGroup>
+	
+	<PropertyGroup>
+		<AnalysisLevel>latest</AnalysisLevel>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	</PropertyGroup>
 
     <ItemGroup>
         <Folder Include="ClippySync.Web\" />
