@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClippySync.Web", "ClippySyn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClippySync.Tray", "ClippySync.Tray\ClippySync.Tray.csproj", "{ADCBCFD0-E128-41ED-B288-CCAE8C9CC229}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClippySync.Test", "ClippySync.Test\ClippySync.Test.csproj", "{239415A7-FF05-4E18-BD6B-C4B42A147624}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{ADCBCFD0-E128-41ED-B288-CCAE8C9CC229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADCBCFD0-E128-41ED-B288-CCAE8C9CC229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADCBCFD0-E128-41ED-B288-CCAE8C9CC229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{239415A7-FF05-4E18-BD6B-C4B42A147624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{239415A7-FF05-4E18-BD6B-C4B42A147624}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{239415A7-FF05-4E18-BD6B-C4B42A147624}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{239415A7-FF05-4E18-BD6B-C4B42A147624}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
