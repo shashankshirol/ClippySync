@@ -72,3 +72,28 @@ This tool is designed to work with iOS Shortcuts. You can create a shortcut on y
 
 - Put the iOS clipboard content on Windows clipboard.
 - Get the Windows clipboard content on iOS clipboard.
+
+### Push iOS Clipboard to Windows
+
+1. Open the Shortcuts app on iOS and create a new shortcut.
+2. Add the `Get Clipboard` action so the shortcut reads the current iOS clipboard.
+3. Add a `Text` action and set it to your ClippySync endpoint, for example `http://192.168.1.x:8877/set-clipboard`.
+4. Add a `Get Contents of URL` action.
+  - Set `Method` to `POST`.
+  - Set `Request Body` to `Form` → `Request Body` → `Text` and choose the output of `Get Clipboard`.
+  - Add a header with key `X-Device-Key` and value matching your PC's `Environment.MachineName`.
+5. Optionally add `Show Result` or `Notification` actions so you get confirmation when the clipboard sync succeeds.
+6. Save the shortcut and add it to the share sheet or home screen for quick access.
+
+### Pull Windows Clipboard to iOS
+
+1. Create another shortcut in the Shortcuts app.
+2. Add a `Text` action containing your ClippySync endpoint, e.g. `http://192.168.1.x:8877/clipboard`.
+3. Add a `Get Contents of URL` action.
+  - Ensure `Method` is `GET`.
+  - Add the `X-Device-Key` header with your PC's device key.
+4. Add a `Set Clipboard` action and feed it the response from `Get Contents of URL`.
+5. Optionally add a `Show Result` action to preview the fetched text before it replaces your iOS clipboard.
+6. Save the shortcut and trigger it through Siri, widgets, or the share sheet.
+
+> Tip: If your network assigns IPs dynamically, consider creating a Shortcut variable for the base URL so you only update it in one place when it changes.
