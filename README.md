@@ -4,7 +4,7 @@
   <img src="assets/logo.svg" width="400" alt="ClippySync logo">
 </p>
 
-ClippySync is a lightweight clipboard synchronization tool that runs as a Windows System Tray application. It hosts a local .NET Web API that allows trusted devices on your network (such as a phone via iOS Shortcuts) to read from and write to your computer's clipboard.
+ClippySync is a lightweight local-network clipboard synchronization tool that runs as a Windows System Tray application. It hosts a local .NET Web API that allows trusted iOS devices on your network (via iOS Shortcuts) to read from and write to your computer's clipboard.
 
 ## Features
 
@@ -68,6 +68,8 @@ curl -X POST -H "X-Device-Key: MY-PC-NAME" -d "Hello World" http://192.168.1.x:8
 
 ## iOS Shortcuts
 
+#### _(Update this part to showcase new Setup Wizard)_
+
 This tool is designed to work with iOS Shortcuts. You can create a shortcut on your iPhone that:
 
 - Put the iOS clipboard content on Windows clipboard.
@@ -96,4 +98,4 @@ This tool is designed to work with iOS Shortcuts. You can create a shortcut on y
 5. Optionally add a `Show Result` action to preview the fetched text before it replaces your iOS clipboard.
 6. Save the shortcut and trigger it through Siri, widgets, or the share sheet.
 
-> Tip: If your network assigns IPs dynamically, consider creating a Shortcut variable for the base URL so you only update it in one place when it changes.
+> Tip: If your network assigns IPs dynamically, consider running the configure shortcut to setup the right IP.
