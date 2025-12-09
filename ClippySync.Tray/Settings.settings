@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Config" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://www.icloud.com/shortcuts/7d775693983541779e6e612cdc9e6cf2</Value>
+      <Value Profile="(Default)">https://www.icloud.com/shortcuts/ec856aae12424c8983ab96e663e4489f</Value>
     </Setting>
     <Setting Name="IOS2WIN" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://www.icloud.com/shortcuts/1832027b9e2a4171b09eca052c6aa03f</Value>

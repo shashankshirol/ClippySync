@@ -25,7 +25,7 @@ namespace ClippySync.Tray {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/7d775693983541779e6e612cdc9e6cf2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/ec856aae12424c8983ab96e663e4489f")]
         public string Config {
             get {
                 return ((string)(this["Config"]));

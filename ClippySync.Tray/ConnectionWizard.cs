@@ -121,23 +121,30 @@ public partial class ConnectionWizard : Form
 
     private void InitializeInstallPage()
     {
-        // Group box with the step title in the border
-        var group = new GroupBox
+        var panel = new Panel
         {
-            Text = "Step 1: Install the three generic Shortcuts by scanning these QR codes on your iPhone.",
             Dock = DockStyle.Fill,
-            Padding = new Padding(12, 10, 12, 10)
+            Padding = new Padding(10)
         };
 
+        var lblIntro = new Label
+        {
+            Text = "Step 1: Setup the Shortcuts",
+            Font = new Font(Font.FontFamily, 10, FontStyle.Bold),
+            AutoSize = true,
+            Location = new Point(0, 0)
+
+        };
         // Root layout inside the group: grid + tip at the bottom
         var root = new TableLayoutPanel
         {
             Dock = DockStyle.Fill,
             ColumnCount = 1,
-            RowCount = 2,
+            RowCount = 3,
             Padding = new Padding(0),
             Margin = new Padding(0)
         };
+        root.RowStyles.Add(new RowStyle(SizeType.AutoSize)); // Intro
         root.RowStyles.Add(new RowStyle(SizeType.Percent, 100)); // grid
         root.RowStyles.Add(new RowStyle(SizeType.AutoSize));     // tip
 
@@ -193,11 +200,12 @@ public partial class ConnectionWizard : Form
             Dock = DockStyle.Fill,
         };
 
-        root.Controls.Add(grid, 0, 0);
-        root.Controls.Add(lblTip, 0, 1);
+        root.Controls.Add(lblIntro, 0, 0);
+        root.Controls.Add(grid, 0, 1);
+        root.Controls.Add(lblTip, 0, 2);
 
-        group.Controls.Add(root);
-        tabInstall.Controls.Add(group);
+        panel.Controls.Add(root);
+        tabInstall.Controls.Add(panel);
     }
 
     private void InitializeConfigurePage()
