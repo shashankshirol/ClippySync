@@ -1,5 +1,6 @@
 ﻿using ClippySync.Web;
 using Microsoft.AspNetCore.Builder;
+using System.Runtime.CompilerServices;
 
 namespace ClippySync.Tray;
 
@@ -7,6 +8,7 @@ public class TrayContent : ApplicationContext
 {
     private readonly NotifyIcon _trayIcon;
     private readonly WebApplication _webapp;
+    private ConnectionWizard? _connectionWizard;
 
     public TrayContent(WebApplication webapp)
     {
@@ -41,17 +43,22 @@ public class TrayContent : ApplicationContext
 
     private void NotifyIconOnMouseClick(object? sender, MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Left) ShowConnectionInfo();
+        if (e.Button == MouseButtons.Left) ShowConnectionWizard();
     }
 
     private void OnShowInfoClicked(object? sender, EventArgs e)
     {
-        ShowConnectionInfo();
+        ShowConnectionWizard();
     }
 
-    private void ShowConnectionInfo()
+    private void ShowConnectionWizard()
     {
         var ip = Util.GetLocalIPv4();
+        var port = Util.GetPort();
+
+        var apiBaseUrl = $"http://{ip}:{port}";
+        var deviceKey = Environment.MachineName;
+
         if (ip == null)
         {
             MessageBox.Show("Could not determine local IP address.", "ClippySync", MessageBoxButtons.OK,
@@ -59,14 +66,12 @@ public class TrayContent : ApplicationContext
             return;
         }
 
-        var port = 8877; // keep in sync with your server
-        var message =
-            $"ClippySync is running.\n\n" +
-            $"Local IP: {ip}\n" +
-            $"URL: http://{ip}:{port}\n\n" +
-            $"Use this URL in your iOS Shortcuts.";
+        var shortcuts = QRGenerator.GenerateAllShortcutQrs(apiBaseUrl, deviceKey);
+        _connectionWizard = new ConnectionWizard(shortcuts, apiBaseUrl, deviceKey);
 
-        MessageBox.Show(message, "ClippySync", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        _connectionWizard.Show();
+        _connectionWizard.BringToFront();
+        _connectionWizard.Activate();
     }
 
     private async void OnExitClicked(object? sender, EventArgs e)

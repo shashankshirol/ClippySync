@@ -1,15 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClippySync.Tray" GeneratedClassName="App">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ClippySync.Tray" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="Config" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://www.icloud.com/shortcuts/AAAAAAA</Value>
+      <Value Profile="(Default)">https://www.icloud.com/shortcuts/7d775693983541779e6e612cdc9e6cf2</Value>
     </Setting>
     <Setting Name="IOS2WIN" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://www.icloud.com/shortcuts/BBBBBBB</Value>
+      <Value Profile="(Default)">https://www.icloud.com/shortcuts/1832027b9e2a4171b09eca052c6aa03f</Value>
     </Setting>
     <Setting Name="WIN2IOS" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">https://www.icloud.com/shortcuts/CCCCCCC</Value>
+      <Value Profile="(Default)">https://www.icloud.com/shortcuts/daba4a07236c4344908d0b6e61d19839</Value>
     </Setting>
   </Settings>
 </SettingsFile>

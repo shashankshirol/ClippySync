@@ -25,7 +25,7 @@ public abstract class ClippyWebApp
         var app = builder.Build();
 
         var ip = Util.GetLocalIPv4();
-        var port = 8877;
+        var port = Util.GetPort();
 
         app.UseHttpsRedirection();
 
@@ -63,10 +63,10 @@ public abstract class ClippyWebApp
 
 
         // Endpoint to set clipboard text
-        app.MapPost("/set-clipboard", async (HttpContext httpContext) =>
+        app.MapPost("/set-clipboard", static async (HttpContext httpContext) =>
             {
                 var body = await JsonSerializer.DeserializeAsync<Dictionary<string, string>>(httpContext.Request.Body);
-                var newClipboardText = body["clipboard"];
+                var newClipboardText = body!["clipboard"];
                 await ClipboardService.SetTextAsync(newClipboardText);
                 return Results.Ok(new { Message = "Clipboard updated successfully." });
             }).WithName("SetClipboardText")

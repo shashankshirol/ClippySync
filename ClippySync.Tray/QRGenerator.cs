@@ -19,7 +19,7 @@ public static class QRGenerator
             { "Config", CreateQR(Settings.Default.Config) },
             { "iOS2Win", CreateQR(Settings.Default.IOS2WIN)  },
             { "Win2iOS", CreateQR(Settings.Default.WIN2IOS) },
-            { "Configure", CreateQR(configureUrl) }
+            { "RunConfig", CreateQR(configureUrl) }
         };
 
         return returnObject;
@@ -36,7 +36,7 @@ public static class QRGenerator
         return $"shortcuts://run-shortcut?name={encodedName}&input=text&text={encodedText}";
     }
 
-    private static Bitmap CreateQR(string payload, int pixelsPerModule = 10)
+    private static Bitmap CreateQR(string payload, int pixelsPerModule = 12)
     {
         using var generator = new QRCodeGenerator();
         using var data = generator.CreateQrCode(payload, QRCodeGenerator.ECCLevel.Q);

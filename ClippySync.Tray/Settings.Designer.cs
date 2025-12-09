@@ -25,7 +25,7 @@ namespace ClippySync.Tray {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/AAAAAAA")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/7d775693983541779e6e612cdc9e6cf2")]
         public string Config {
             get {
                 return ((string)(this["Config"]));
@@ -34,7 +34,7 @@ namespace ClippySync.Tray {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/BBBBBBB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/1832027b9e2a4171b09eca052c6aa03f")]
         public string IOS2WIN {
             get {
                 return ((string)(this["IOS2WIN"]));
@@ -43,7 +43,7 @@ namespace ClippySync.Tray {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/CCCCCCC")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.icloud.com/shortcuts/daba4a07236c4344908d0b6e61d19839")]
         public string WIN2IOS {
             get {
                 return ((string)(this["WIN2IOS"]));
