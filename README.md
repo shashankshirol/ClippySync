@@ -29,15 +29,6 @@ ClippySync is a lightweight local-network clipboard synchronization tool that ru
 3. An icon will appear in your system tray.
 4. Click the icon (or right-click and select "Show connection info") to see the IP address and port (default: `8877`).
 
-### Running via Command Line (Dev)
-
-You can also run the web API standalone without the tray icon:
-
-```powershell
-cd ClippySync.Web
-dotnet run
-```
-
 ## API Usage
 
 ### Authentication
@@ -58,12 +49,12 @@ Requests to clipboard endpoints require the `X-Device-Key` header.
 
 **Get Clipboard:**
 ```bash
-curl -H "X-Device-Key: MY-PC-NAME" http://192.168.1.x:8877/clipboard
+curl -H "X-Device-Key: MY-PC-NAME" http://192.168.x.x:8877/clipboard
 ```
 
 **Set Clipboard:**
 ```bash
-curl -X POST -H "X-Device-Key: MY-PC-NAME" -d "Hello World" http://192.168.1.x:8877/set-clipboard
+curl -X POST -H "X-Device-Key: MY-PC-NAME" -d "Hello World" http://192.168.x.x:8877/set-clipboard
 ```
 
 ## iOS Shortcuts
