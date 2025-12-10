@@ -1,0 +1,94 @@
+name: Manual Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag name (e.g. v0.1.0)'
+        required: true
+      notes:
+        description: 'Release notes (optional)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write   # required to create tags/releases
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    env:
+      TAG_NAME: ${{ github.event.inputs.tag }}
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main          # always build from main
+          fetch-depth: 0     # needed so we can create a tag
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          # Match your TargetFramework from the publish profile
+          # If you're actually on a preview SDK, this might be 10.0.x
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore ClippySync.sln
+
+      - name: Build solution (Release)
+        run: dotnet build ClippySync.sln -c Release --no-restore
+
+      # --------- PUBLISH x64 ---------
+      - name: Publish Tray app (win-x64)
+        run: >
+          dotnet publish ClippySync.Tray/ClippySync.Tray.csproj
+          -c Release
+          -f net10.0-windows
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -o artifacts/win-x64
+
+      # --------- PUBLISH x86 ---------
+      - name: Publish Tray app (win-x86)
+        run: >
+          dotnet publish ClippySync.Tray/ClippySync.Tray.csproj
+          -c Release
+          -f net10.0-windows
+          -r win-x86
+          --self-contained true
+          -p:PublishSingleFile=true
+          -o artifacts/win-x86
+
+      # --------- ZIP ARTIFACTS ---------
+      - name: Zip published outputs
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Path artifacts/zips -Force | Out-Null
+
+          $zipX64 = "artifacts/zips/ClippySync-win-x64-$env:TAG_NAME.zip"
+          $zipX86 = "artifacts/zips/ClippySync-win-x86-$env:TAG_NAME.zip"
+
+          Compress-Archive -Path artifacts/win-x64/* -DestinationPath $zipX64
+          Compress-Archive -Path artifacts/win-x86/* -DestinationPath $zipX86
+
+          Write-Host "Created $zipX64"
+          Write-Host "Created $zipX86"
+
+      # --------- CREATE RELEASE ---------
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          name: ClippySync ${{ env.TAG_NAME }}
+          body: ${{ github.event.inputs.notes }}
+          draft: false
+          prerelease: false
+          files: |
+            artifacts/zips/ClippySync-win-x64-${{ env.TAG_NAME }}.zip
+            artifacts/zips/ClippySync-win-x86-${{ env.TAG_NAME }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

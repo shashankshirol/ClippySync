@@ -103,14 +103,6 @@ public abstract class ClippyWebApp
             )
             .RequireAuthorization();
 
-        Console.WriteLine("===============================================");
-        Console.WriteLine(" Clipboard Server Running ");
-        Console.WriteLine("===============================================");
-        Console.WriteLine($" Local IP Address:  {ip}");
-        Console.WriteLine($" Listening URL:     http://{ip}:{port}");
-        Console.WriteLine(" Use this in Shortcuts to connect your phone.");
-        Console.WriteLine("===============================================");
-
         return app;
     }
 }

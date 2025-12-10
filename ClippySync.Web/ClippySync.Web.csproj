@@ -7,6 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="ClippySync.Web\**" />
+      <Content Remove="ClippySync.Web\**" />
+      <EmbeddedResource Remove="ClippySync.Web\**" />
+      <None Remove="ClippySync.Web\**" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
@@ -16,10 +23,7 @@
 	<PropertyGroup>
 		<AnalysisLevel>latest</AnalysisLevel>
 		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<OutputType>Library</OutputType>
 	</PropertyGroup>
-
-    <ItemGroup>
-        <Folder Include="ClippySync.Web\" />
-    </ItemGroup>
 
 </Project>
