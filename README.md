@@ -52,11 +52,6 @@ Requests to clipboard endpoints require the `X-Device-Key` header.
 curl -H "X-Device-Key: MY-PC-NAME" http://192.168.x.x:8877/clipboard
 ```
 
-**Set Clipboard:**
-```bash
-curl -X POST -H "X-Device-Key: MY-PC-NAME" -d "Hello World" http://192.168.x.x:8877/set-clipboard
-```
-
 ## iOS Shortcuts
 
 This tool is designed to work with iOS Shortcuts. There are three shortcuts that the tool requires:
